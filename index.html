@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gisela's Cakes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Tortas y pasteles personalizados hechos en casa en Schaumburg, IL. Tres leches, tortas de cumpleaños, quinceañeras, cupcakes y mesas de postres. Custom cakes in Schaumburg, Illinois.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Figtree:wght@400;500;600;700&family=Pinyon+Script&display=swap">
+<style>
+/* Layout: a pastry-box page — blush "fondant" ground, chocolate ink, one raspberry accent and the gold of Gisela's logo; sections stack like tiers. */
+:root {
+  --bg: #fbf4f2;
+  --surface: #ffffff;
+  --tint: #f5e4e2;
+  --ink: #2a1916;
+  --muted: #6e5853;
+  --line: #e6d2ce;
+  --accent: #b5174f;
+  --accent-ink: #ffffff;
+  --gold: #a87a26;
+  --display: "Yeseva One", Georgia, "Times New Roman", serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --script: "Pinyon Script", "Brush Script MT", cursive;
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1210; --surface: #271a17; --tint: #33221e; --ink: #f7e9e5; --muted: #c4aaa3;
+    --line: #47322d; --accent: #ef5d8f; --accent-ink: #1c1210; --gold: #d9ad5b; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1210; --surface: #271a17; --tint: #33221e; --ink: #f7e9e5; --muted: #c4aaa3;
+  --line: #47322d; --accent: #ef5d8f; --accent-ink: #1c1210; --gold: #d9ad5b; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1.05rem/1.6 var(--body); }
+img { max-width: 100%; display: block; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.12; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
+h3 { font-size: 1.3rem; }
+.eyebrow { font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.lede { color: var(--muted); max-width: 60ch; }
+section { padding-block: clamp(56px, 9vw, 104px); }
+.sec-head { display: grid; gap: 12px; margin-bottom: 40px; }
+
+/* header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.brand { font-family: var(--script); font-size: 2rem; color: var(--ink); text-decoration: none; line-height: 1; }
+.brand span { color: var(--accent); }
+.nav { display: flex; align-items: center; gap: 22px; }
+.nav a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: .95rem; }
+.nav a:hover { color: var(--accent); }
+.lang { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 6px 12px; font: 600 .8rem var(--body); cursor: pointer; }
+@media (max-width: 760px) { .nav a:not(.btn) { display: none; } }
+
+.btn { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: 700; padding: 13px 22px; border-radius: 999px; border: 0; cursor: pointer; font: 700 1rem var(--body); }
+.btn:hover { filter: brightness(1.08); }
+.btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+.nav .btn { padding: 9px 16px; font-size: .9rem; }
+
+/* hero */
+.hero { padding-block: clamp(40px, 7vw, 88px); }
+.hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+.hero h1 { font-size: clamp(2.5rem, 6.2vw, 4.4rem); }
+.hero h1 em { font-family: var(--script); font-style: normal; color: var(--accent); font-size: 1.15em; }
+.hero p { font-size: 1.15rem; color: var(--muted); max-width: 46ch; margin: 20px 0 28px; }
+.hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 28px; font-size: .92rem; color: var(--muted); padding: 0; list-style: none; }
+.facts li::before { content: "✓ "; color: var(--gold); font-weight: 700; }
+.stack { position: relative; aspect-ratio: 4/5; max-width: 100%; }
+.stack figure { position: absolute; margin: 0; border-radius: 18px; overflow: hidden; box-shadow: 0 18px 40px -18px rgba(42,25,22,.45); border: 6px solid var(--surface); }
+.stack figure:nth-child(1) { inset: 0 18% 22% 0; transform: rotate(-3deg); }
+.stack figure:nth-child(2) { inset: 34% 0 0 30%; transform: rotate(4deg); }
+.stack .tag { position: absolute; left: -6px; bottom: 6%; background: var(--surface); border: 1px solid var(--line); padding: 10px 16px; border-radius: 12px; font-size: .85rem; font-weight: 600; z-index: 2; }
+.stack .tag b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.4rem; color: var(--accent); }
+@media (max-width: 820px) { .hero .wrap { grid-template-columns: 1fr; } .stack { max-width: 420px; margin: 0 auto; width: 100%; } }
+
+/* photo slot: shows the photo, or a labelled tile until the photo is added */
+.ph { width: 100%; height: 100%; background: var(--tint); position: relative; }
+.ph img { width: 100%; height: 100%; object-fit: cover; }
+.ph .lbl { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 12px; font-family: var(--display); color: var(--muted); font-size: 1rem; }
+.ph img + .lbl { display: none; }
+
+/* menu */
+.menu { background: var(--surface); border-block: 1px solid var(--line); }
+.menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.item { background: var(--surface); padding: 28px; display: grid; gap: 10px; align-content: start; }
+.item .price { font-variant-numeric: tabular-nums; color: var(--accent); font-weight: 700; }
+.item p { margin: 0; color: var(--muted); font-size: .97rem; }
+@media (max-width: 860px) { .menu-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .menu-grid { grid-template-columns: 1fr; } }
+.note { font-size: .88rem; color: var(--muted); margin-top: 18px; }
+
+/* gallery */
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 220px; gap: 12px; }
+.gallery figure { margin: 0; border-radius: 14px; overflow: hidden; position: relative; }
+.gallery figure.tall { grid-row: span 2; }
+.gallery figcaption { position: absolute; left: 10px; bottom: 10px; background: var(--surface); color: var(--ink); font-size: .8rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
+@media (max-width: 860px) { .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; } }
+
+/* process */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; counter-reset: s; padding: 0; list-style: none; margin: 0; }
+.steps li { counter-increment: s; display: grid; gap: 8px; align-content: start; }
+.steps li::before { content: counter(s); font-family: var(--display); font-size: 2.4rem; color: var(--gold); line-height: 1; }
+.steps p { margin: 0; color: var(--muted); font-size: .97rem; }
+@media (max-width: 860px) { .steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .steps { grid-template-columns: 1fr; } }
+
+/* about */
+.about .wrap { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+.about .portrait { aspect-ratio: 4/5; border-radius: 200px 200px 18px 18px; overflow: hidden; max-width: 100%; }
+.about blockquote { margin: 18px 0 0; font-family: var(--script); font-size: 2rem; color: var(--accent); line-height: 1.2; }
+@media (max-width: 760px) { .about .wrap { grid-template-columns: 1fr; } .about .portrait { max-width: 320px; } }
+
+/* area */
+.area { background: var(--tint); }
+.towns { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; list-style: none; margin: 24px 0 0; }
+.towns li { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; font-weight: 600; font-size: .92rem; }
+
+/* order form */
+.order .wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 5vw, 64px); }
+form { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: clamp(20px, 4vw, 34px); display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+form .full { grid-column: 1 / -1; }
+label { display: grid; gap: 6px; font-weight: 600; font-size: .9rem; min-width: 0; }
+input, select, textarea { font: 400 1rem var(--body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px; width: 100%; }
+textarea { min-height: 110px; resize: vertical; }
+.contact-list { display: grid; gap: 14px; margin-top: 24px; padding: 0; list-style: none; }
+.contact-list b { display: block; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.form-msg { grid-column: 1 / -1; margin: 0; font-size: .92rem; color: var(--muted); }
+@media (max-width: 820px) { .order .wrap { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { form { grid-template-columns: 1fr; } }
+
+/* faq */
+details { border-bottom: 1px solid var(--line); padding-block: 18px; }
+summary { cursor: pointer; font-weight: 600; font-size: 1.05rem; }
+details p { color: var(--muted); margin: 10px 0 0; max-width: 70ch; }
+
+footer { border-top: 1px solid var(--line); padding-block: 36px; font-size: .88rem; color: var(--muted); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+.legal { max-width: 70ch; }
+[data-en] { display: none; }
+html[lang="en"] [data-es] { display: none; }
+html[lang="en"] [data-en] { display: revert; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Gisela's <span>Cakes</span></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#menu"><span data-es>Menú</span><span data-en>Menu</span></a>
+      <a href="#galeria"><span data-es>Galería</span><span data-en>Gallery</span></a>
+      <a href="#como"><span data-es>Cómo pedir</span><span data-en>How to order</span></a>
+      <a href="#faq">FAQ</a>
+      <button class="lang" id="langBtn" type="button" aria-label="Cambiar idioma / Switch language">EN</button>
+      <a class="btn" href="#pedido"><span data-es>Pedir</span><span data-en>Order</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow"><span data-es>Hecho en casa · Schaumburg, IL</span><span data-en>Home-baked · Schaumburg, IL</span></p>
+      <h1><span data-es>Tortas que saben a <em>celebración</em></span><span data-en>Cakes that taste like a <em>celebration</em></span></h1>
+      <p>
+        <span data-es>Tortas personalizadas, tres leches y mesas de postres hechas a mano por Gisela, por encargo, para cumpleaños, quinceañeras, baby showers y bodas.</span>
+        <span data-en>Custom cakes, tres leches and dessert tables handmade by Gisela, made to order for birthdays, quinceañeras, baby showers and weddings.</span>
+      </p>
+      <div class="ctas">
+        <a class="btn" href="#pedido"><span data-es>Pide tu torta</span><span data-en>Order your cake</span></a>
+        <a class="btn ghost" href="#galeria"><span data-es>Ver trabajos</span><span data-en>See her work</span></a>
+      </div>
+      <ul class="facts">
+        <li><span data-es>Pedidos con 7 días de anticipación</span><span data-en>Order 7 days ahead</span></li>
+        <li><span data-es>Español e inglés</span><span data-en>Spanish &amp; English</span></li>
+        <li><span data-es>Recogida o entrega local</span><span data-en>Pickup or local delivery</span></li>
+      </ul>
+    </div>
+    <div class="stack" aria-hidden="true">
+      <figure><div class="ph"><img src="fotos/xv-anos.jpg" alt="" onerror="this.remove()"><div class="lbl">Torta XV años</div></div></figure>
+      <figure><div class="ph"><img src="fotos/flores.jpg" alt="" onerror="this.remove()"><div class="lbl">Torta de flores</div></div></figure>
+      <div class="tag"><b>Dulce de leche</b><span data-es>el relleno favorito de la casa</span><span data-en>the house favorite filling</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span data-es>Lo que hace Gisela</span><span data-en>What Gisela bakes</span></p>
+      <h2><span data-es>El menú</span><span data-en>The menu</span></h2>
+      <p class="lede"><span data-es>Cada pedido se diseña contigo. Los precios son desde, y dependen del tamaño, el sabor y la decoración.</span><span data-en>Every order is designed with you. Prices are starting points and depend on size, flavor and decoration.</span></p>
+    </div>
+    <div class="menu-grid">
+      <div class="item">
+        <h3><span data-es>Tortas de cumpleaños</span><span data-en>Birthday cakes</span></h3>
+        <p><span data-es>Personajes, temas y colores a tu gusto. Hello Kitty, princesas, carros, fútbol.</span><span data-en>Characters, themes and colors your way. Hello Kitty, princesses, trucks, soccer.</span></p>
+        <span class="price"><span data-es>desde</span><span data-en>from</span> $65 · 10–12 <span data-es>porciones</span><span data-en>servings</span></span>
+      </div>
+      <div class="item">
+        <h3><span data-es>Sabores latinos</span><span data-en>Latin flavors</span></h3>
+        <p><span data-es>Dulce de leche, guayaba, coco y frutos rojos, en tortas suaves con buttercream de la casa.</span><span data-en>Dulce de leche, guava, coconut and berries, in soft cakes with house buttercream.</span></p>
+        <span class="price"><span data-es>desde</span><span data-en>from</span> $45 · <span data-es>torta de 6"</span><span data-en>6" cake</span></span>
+      </div>
+      <div class="item">
+        <h3><span data-es>Quinceañeras y bodas</span><span data-en>Quinceañeras &amp; weddings</span></h3>
+        <p><span data-es>Tortas de varios pisos con flores, perlas y detalles en dorado.</span><span data-en>Tiered cakes with flowers, pearls and gold details.</span></p>
+        <span class="price"><span data-es>desde</span><span data-en>from</span> $5.50 / <span data-es>porción</span><span data-en>serving</span></span>
+      </div>
+      <div class="item">
+        <h3>Cupcakes</h3>
+        <p><span data-es>Por docena, o armados como pull-apart: vestido de princesa, número, corazón.</span><span data-en>By the dozen, or as pull-apart designs: princess dress, number, heart.</span></p>
+        <span class="price"><span data-es>desde</span><span data-en>from</span> $36 / <span data-es>docena</span><span data-en>dozen</span></span>
+      </div>
+      <div class="item">
+        <h3><span data-es>Mesas de postres</span><span data-en>Dessert tables</span></h3>
+        <p><span data-es>Vasitos de postre, cake pops y mini tortas para baby showers y eventos.</span><span data-en>Dessert cups, cake pops and mini cakes for baby showers and events.</span></p>
+        <span class="price"><span data-es>desde</span><span data-en>from</span> $4 / <span data-es>pieza</span><span data-en>piece</span></span>
+      </div>
+      <div class="item">
+        <h3><span data-es>Ocasiones especiales</span><span data-en>Special occasions</span></h3>
+        <p><span data-es>Día de las Madres, Día del Padre, San Valentín, Navidad y graduaciones.</span><span data-en>Mother's Day, Father's Day, Valentine's, Christmas and graduations.</span></p>
+        <span class="price"><span data-es>pregunta por la edición del mes</span><span data-en>ask about this month's special</span></span>
+      </div>
+    </div>
+    <p class="note"><span data-es>Sabores: vainilla, chocolate, red velvet, zanahoria, marmoleado. Rellenos: dulce de leche, mermelada de fresa, Nutella, frutos rojos. También versión sin huevo (eggless).</span><span data-en>Flavors: vanilla, chocolate, red velvet, carrot, marble. Fillings: dulce de leche, strawberry jam, Nutella, berries. Eggless versions available.</span></p>
+  </div>
+</section>
+
+<section id="galeria">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span data-es>Galería</span><span data-en>Gallery</span></p>
+      <h2><span data-es>Algunas de sus tortas</span><span data-en>A few of her cakes</span></h2>
+      <p class="lede"><span data-es>Más trabajos en Instagram</span><span data-en>More on Instagram</span> <a href="https://www.instagram.com/giselascakesdallas/" target="_blank" rel="noopener">@giselascakes</a>.</p>
+    </div>
+    <div class="gallery">
+      <figure class="tall"><div class="ph"><img src="fotos/xv-anos.jpg" alt="Torta de XV años con abanicos y flores de cerezo" loading="lazy" onerror="this.remove()"><div class="lbl">XV años</div></div><figcaption><span data-es>XV años</span><span data-en>XV años</span></figcaption></figure>
+      <figure><div class="ph"><img src="fotos/hello-kitty.jpg" alt="Torta de corazón de Hello Kitty" loading="lazy" onerror="this.remove()"><div class="lbl">Hello Kitty</div></div><figcaption><span data-es>Hello Kitty</span><span data-en>Hello Kitty</span></figcaption></figure>
+      <figure><div class="ph"><img src="fotos/vestido-cupcakes.jpg" alt="Cupcakes en forma de vestido de princesa" loading="lazy" onerror="this.remove()"><div class="lbl">Vestido de cupcakes</div></div><figcaption><span data-es>Vestido de cupcakes</span><span data-en>Cupcake dress</span></figcaption></figure>
+      <figure class="tall"><div class="ph"><img src="fotos/boda.jpg" alt="Torta de bodas de tres pisos con cascada de perlas" loading="lazy" onerror="this.remove()"><div class="lbl">Boda</div></div><figcaption><span data-es>Boda</span><span data-en>Wedding</span></figcaption></figure>
+      <figure><div class="ph"><img src="fotos/baby-shower.jpg" alt="Mesa de postres para baby shower" loading="lazy" onerror="this.remove()"><div class="lbl">Baby shower</div></div><figcaption><span data-es>Baby shower</span><span data-en>Baby shower</span></figcaption></figure>
+      <figure><div class="ph"><img src="fotos/dia-del-padre.jpg" alt="Torta de chocolate en forma de esmoquin" loading="lazy" onerror="this.remove()"><div class="lbl">Día del Padre</div></div><figcaption><span data-es>Día del Padre</span><span data-en>Father's Day</span></figcaption></figure>
+      <figure class="tall"><div class="ph"><img src="fotos/princesa.jpg" alt="Torta de princesa con flores" loading="lazy" onerror="this.remove()"><div class="lbl">Princesa</div></div><figcaption><span data-es>Princesa</span><span data-en>Princess</span></figcaption></figure>
+      <figure><div class="ph"><img src="fotos/flores.jpg" alt="Torta con flores naturales" loading="lazy" onerror="this.remove()"><div class="lbl">Flores naturales</div></div><figcaption><span data-es>Flores naturales</span><span data-en>Fresh flowers</span></figcaption></figure>
+      <figure><div class="ph"><img src="fotos/blaze.jpg" alt="Torta de Blaze and the Monster Machines" loading="lazy" onerror="this.remove()"><div class="lbl">Blaze</div></div><figcaption><span data-es>Blaze</span><span data-en>Blaze</span></figcaption></figure>
+      <figure class="tall"><div class="ph"><img src="fotos/mariposas.jpg" alt="Torta lila con mariposas" loading="lazy" onerror="this.remove()"><div class="lbl">Mariposas</div></div><figcaption><span data-es>Mariposas</span><span data-en>Butterflies</span></figcaption></figure>
+      <figure><div class="ph"><img src="fotos/silueta.jpg" alt="Torta con silueta y rosetones de crema" loading="lazy" onerror="this.remove()"><div class="lbl">Elegancia</div></div><figcaption><span data-es>Elegancia</span><span data-en>Elegance</span></figcaption></figure>
+      <figure><div class="ph"><img src="fotos/gym.jpg" alt="Torta temática de gimnasio" loading="lazy" onerror="this.remove()"><div class="lbl">Fitness</div></div><figcaption><span data-es>Fitness</span><span data-en>Fitness</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="como">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span data-es>Así de fácil</span><span data-en>Easy as that</span></p>
+      <h2><span data-es>Cómo hacer tu pedido</span><span data-en>How to order</span></h2>
+    </div>
+    <ol class="steps">
+      <li><h3><span data-es>Cuéntale tu idea</span><span data-en>Share your idea</span></h3><p><span data-es>Llena el formulario o escribe por WhatsApp: fecha, número de invitados y una foto de inspiración.</span><span data-en>Fill out the form or message on WhatsApp: date, guest count and an inspiration photo.</span></p></li>
+      <li><h3><span data-es>Recibe tu cotización</span><span data-en>Get your quote</span></h3><p><span data-es>Gisela te responde en menos de 24 horas con el diseño, sabores y precio.</span><span data-en>Gisela replies within 24 hours with design, flavors and price.</span></p></li>
+      <li><h3><span data-es>Reserva tu fecha</span><span data-en>Reserve your date</span></h3><p><span data-es>Un depósito del 50% por Zelle aparta tu fecha. El resto, al recoger.</span><span data-en>A 50% deposit via Zelle holds your date. The rest at pickup.</span></p></li>
+      <li><h3><span data-es>A celebrar</span><span data-en>Celebrate</span></h3><p><span data-es>Recoge en un punto acordado en Schaumburg o pide entrega a domicilio.</span><span data-en>Pick up at an agreed spot in Schaumburg or get local delivery.</span></p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="portrait"><div class="ph"><img src="fotos/gisela.jpg" alt="Gisela, repostera de Gisela's Cakes" style="object-position:50% 30%" onerror="this.remove()"><div class="lbl">Gisela</div></div></div>
+    <div>
+      <p class="eyebrow"><span data-es>Quién hornea</span><span data-en>Who bakes</span></p>
+      <h2><span data-es>Hola, soy Gisela</span><span data-en>Hi, I'm Gisela</span></h2>
+      <p class="lede">
+        <span data-es>Hago pasteles, tortas, cakes, bolos y queques para que celebres cada ocasión especial. Empecé horneando en Dallas para familia y amigos, y ahora estoy en Schaumburg, lista para endulzar las fiestas de mis nuevos vecinos. Cada torta se hace desde cero, en pequeñas cantidades, con ingredientes de verdad.</span>
+        <span data-en>I bake cakes for every special occasion. I started baking in Dallas for family and friends, and now I'm in Schaumburg, ready to sweeten my new neighbors' celebrations. Every cake is made from scratch, in small batches, with real ingredients.</span>
+      </p>
+      <blockquote>“Cada torta es una celebración”</blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="area">
+  <div class="wrap">
+    <p class="eyebrow"><span data-es>Zona de servicio</span><span data-en>Service area</span></p>
+    <h2><span data-es>Recogida en Schaumburg, entrega en el noroeste de Chicago</span><span data-en>Pickup in Schaumburg, delivery across the NW suburbs</span></h2>
+    <ul class="towns">
+      <li>Schaumburg</li><li>Hoffman Estates</li><li>Elk Grove Village</li><li>Roselle</li><li>Palatine</li><li>Arlington Heights</li><li>Streamwood</li><li>Hanover Park</li><li>Rolling Meadows</li><li>Elgin</li>
+    </ul>
+  </div>
+</section>
+
+<section class="order" id="pedido">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow"><span data-es>Pedidos</span><span data-en>Orders</span></p>
+      <h2><span data-es>Pide tu torta</span><span data-en>Order your cake</span></h2>
+      <p class="lede"><span data-es>Llena estos datos y se abrirá WhatsApp con tu pedido listo para enviar.</span><span data-en>Fill in the details and WhatsApp opens with your order ready to send.</span></p>
+      <ul class="contact-list">
+        <li><b>WhatsApp</b><span id="phoneText">(469) 858-8678</span></li>
+        <li><b>Email</b>hola@giselascakes.com</li>
+        <li><b>Instagram</b><a href="https://www.instagram.com/giselascakesdallas/" target="_blank" rel="noopener">@giselascakes</a></li>
+      </ul>
+    </div>
+    <form id="orderForm" novalidate>
+      <label>
+        <span data-es>Tu nombre</span><span data-en>Your name</span>
+        <input id="f-name" name="name" required autocomplete="name">
+      </label>
+      <label>
+        <span data-es>Fecha del evento</span><span data-en>Event date</span>
+        <input id="f-date" name="date" type="date" required>
+      </label>
+      <label>
+        <span data-es>¿Qué necesitas?</span><span data-en>What do you need?</span>
+        <select id="f-type" name="type">
+          <option>Torta de cumpleaños / Birthday cake</option>
+          <option>Sabores latinos / Latin flavors</option>
+          <option>Quinceañera / Boda – Wedding</option>
+          <option>Cupcakes</option>
+          <option>Mesa de postres / Dessert table</option>
+          <option>Otro / Other</option>
+        </select>
+      </label>
+      <label>
+        <span data-es>Invitados</span><span data-en>Guests</span>
+        <input id="f-guests" name="guests" type="number" min="1" inputmode="numeric" placeholder="25">
+      </label>
+      <label class="full">
+        <span data-es>Cuéntanos tu idea (tema, colores, sabor)</span><span data-en>Tell us your idea (theme, colors, flavor)</span>
+        <textarea id="f-idea" name="idea"></textarea>
+      </label>
+      <label class="full">
+        <span data-es>¿Recoger o entrega?</span><span data-en>Pickup or delivery?</span>
+        <select id="f-pickup" name="pickup">
+          <option>Recoger en Schaumburg / Pickup</option>
+          <option>Entrega a domicilio / Delivery</option>
+        </select>
+      </label>
+      <button class="btn full" type="submit"><span data-es>Enviar por WhatsApp</span><span data-en>Send via WhatsApp</span></button>
+      <p class="form-msg" id="formMsg" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">FAQ</p>
+      <h2><span data-es>Preguntas frecuentes</span><span data-en>Questions</span></h2>
+    </div>
+    <details><summary><span data-es>¿Con cuánta anticipación debo pedir?</span><span data-en>How far ahead should I order?</span></summary><p><span data-es>Mínimo 7 días para tortas de cumpleaños y 4–8 semanas para quinceañeras y bodas. Si es urgente, escríbenos: a veces hay espacio.</span><span data-en>At least 7 days for birthday cakes and 4–8 weeks for quinceañeras and weddings. If it's urgent, message us: sometimes there's room.</span></p></details>
+    <details><summary><span data-es>¿Cómo se paga?</span><span data-en>How do I pay?</span></summary><p><span data-es>50% de depósito por Zelle o Venmo para reservar la fecha; el resto al recoger, en efectivo, Zelle o Venmo.</span><span data-en>50% deposit via Zelle or Venmo to reserve the date; balance at pickup in cash, Zelle or Venmo.</span></p></details>
+    <details><summary><span data-es>¿Hacen entregas?</span><span data-en>Do you deliver?</span></summary><p><span data-es>Sí, en Schaumburg y pueblos cercanos. El costo depende de la distancia y empieza en $15.</span><span data-en>Yes, in Schaumburg and nearby towns. Cost depends on distance, starting at $15.</span></p></details>
+    <details><summary><span data-es>¿Manejan alergias?</span><span data-en>Do you handle allergies?</span></summary><p><span data-es>Nuestras tortas contienen o pueden contener trigo, huevo, leche, soya y frutos secos. Avísanos de cualquier alergia antes de pedir.</span><span data-en>Our cakes contain or may contain wheat, egg, milk, soy and tree nuts. Tell us about any allergy before ordering.</span></p></details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Gisela's Cakes · Schaumburg, Illinois</span>
+    <span class="legal"><span data-es>Este producto fue elaborado en una cocina casera no inspeccionada por un departamento de salud, que también puede procesar alérgenos comunes. Si tiene dudas de seguridad, contacte a su departamento de salud local.</span><span data-en>This product was produced in a home kitchen not inspected by a health department that may also process common food allergens. If you have safety concerns, contact your local health department.</span></span>
+  </div>
+</footer>
+
+<script>
+// Número de WhatsApp de Gisela: solo dígitos con código de país (1 + área + número).
+const WHATSAPP = "14698588678";
+
+(function () {
+  const root = document.documentElement;
+  const btn = document.getElementById("langBtn");
+  function setLang(l) {
+    root.lang = l;
+    btn.textContent = l === "es" ? "EN" : "ES";
+    try { localStorage.setItem("gc-lang", l); } catch (e) {}
+  }
+  let saved = null;
+  try { saved = localStorage.getItem("gc-lang"); } catch (e) {}
+  setLang(saved || ((navigator.language || "es").startsWith("en") ? "en" : "es"));
+  btn.addEventListener("click", () => setLang(root.lang === "es" ? "en" : "es"));
+
+  const d = WHATSAPP.replace(/^1/, "");
+  document.getElementById("phoneText").textContent = `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  document.getElementById("orderForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const v = (id) => document.getElementById(id).value.trim();
+    const msg = document.getElementById("formMsg");
+    if (!v("f-name") || !v("f-date")) {
+      msg.textContent = root.lang === "es" ? "Escribe tu nombre y la fecha del evento." : "Please add your name and event date.";
+      return;
+    }
+    const text = [
+      "Hola Gisela! Quiero hacer un pedido:",
+      "Nombre: " + v("f-name"),
+      "Fecha: " + v("f-date"),
+      "Pedido: " + v("f-type"),
+      "Invitados: " + (v("f-guests") || "-"),
+      "Idea: " + (v("f-idea") || "-"),
+      "Entrega: " + v("f-pickup")
+    ].join("\n");
+    window.location.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(text);
+    msg.textContent = root.lang === "es" ? "Abriendo WhatsApp con tu pedido…" : "Opening WhatsApp with your order…";
+  });
+})();
+</script>
+</body>
+</html>
