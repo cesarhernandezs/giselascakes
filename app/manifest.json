@@ -1,0 +1,10 @@
+{
+  "name": "Gisela's Cakes · Costos",
+  "short_name": "GC Costos",
+  "start_url": "/app/",
+  "scope": "/app/",
+  "display": "standalone",
+  "background_color": "#fbf4f2",
+  "theme_color": "#b5174f",
+  "icons": [{ "src": "icono.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }]
+}

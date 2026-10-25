@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#b5174f">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icono.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="GC Costos">
+<title>Gisela's Cakes · Costos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a working tool — sticky header, one content column, bottom tab bar on phones; brand raspberry for actions, semantic colors for stock/state. */
+:root{
+  --bg:#fbf4f2; --surface:#ffffff; --tint:#f5e4e2; --ink:#2a1916; --muted:#6e5853; --line:#e6d2ce;
+  --accent:#b5174f; --accent-ink:#ffffff; --gold:#a87a26;
+  --ok:#2f7d4f; --warn:#b26b00; --bad:#c0392b;
+  --display:"Yeseva One",Georgia,serif; --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#1c1210; --surface:#271a17; --tint:#33221e; --ink:#f7e9e5; --muted:#c4aaa3; --line:#47322d;
+  --accent:#ef5d8f; --accent-ink:#1c1210; --gold:#d9ad5b; --ok:#5cc38a; --warn:#f0a63a; --bad:#ff7a6b; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.5 var(--body);padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;line-height:1.15}
+h2{font-size:1.5rem} h3{font-size:1.1rem}
+a{color:var(--accent)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.brand{font-family:var(--display);font-size:1.25rem}.brand span{color:var(--accent)}
+.who{font-size:.85rem;color:var(--muted)}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav.tabs button{flex:1;background:none;border:0;padding:10px 4px 12px;font-size:.75rem;font-weight:600;color:var(--muted);cursor:pointer;display:grid;justify-items:center;gap:2px}
+nav.tabs button .ic{font-size:1.2rem;line-height:1}
+nav.tabs button[aria-current="page"]{color:var(--accent)}
+@media(min-width:900px){nav.tabs{position:static;border:0;background:none;justify-content:flex-start;gap:6px;padding:0}
+  nav.tabs button{flex:0 0 auto;display:block;padding:8px 14px;border-radius:999px;font-size:.9rem}
+  nav.tabs button .ic{display:none}
+  nav.tabs button[aria-current="page"]{background:var(--tint)}
+  body{padding-bottom:40px}}
+main{padding-block:20px 32px;display:grid;gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:12px;min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:end}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+label{display:grid;gap:4px;font-size:.85rem;font-weight:600;min-width:0}
+label.chk{display:flex;align-items:center;gap:8px;font-weight:500}
+input,select,textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 10px}
+input[type=checkbox]{width:auto}
+textarea{min-height:70px;resize:vertical}
+.btn{display:inline-flex;align-items:center;gap:6px;justify-content:center;background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;padding:10px 16px;font-weight:700;cursor:pointer;text-decoration:none}
+.btn.sec{background:var(--tint);color:var(--ink)}
+.btn.sm{padding:6px 12px;font-size:.85rem}
+.btn.link{background:none;color:var(--accent);padding:4px 6px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.kpi b{display:block;font-family:var(--display);font-weight:400;font-size:1.6rem;font-variant-numeric:tabular-nums}
+.kpi span{font-size:.8rem;color:var(--muted)}
+.muted{color:var(--muted)} .small{font-size:.85rem}
+.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--tint);color:var(--ink)}
+.pill.ok{background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok)}
+.pill.warn{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.pill.bad{background:color-mix(in srgb,var(--bad) 18%,transparent);color:var(--bad)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--tint)}
+tr:last-child td{border-bottom:0}
+td input{min-width:70px;padding:6px 8px}
+.prices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media(max-width:560px){.prices{grid-template-columns:1fr}}
+.price{border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:4px;background:var(--bg)}
+.price.rec{border:2px solid var(--accent)}
+.price b{font-family:var(--display);font-weight:400;font-size:1.7rem;font-variant-numeric:tabular-nums}
+.price small{color:var(--muted)}
+.list{display:grid;gap:10px}
+.item{border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:8px;background:var(--surface)}
+.item .top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+.bar{height:8px;border-radius:99px;background:var(--tint);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ok)}
+.bar i.warn{background:var(--warn)} .bar i.bad{background:var(--bad)}
+.center{min-height:70vh;display:grid;place-items:center;text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-weight:600;z-index:9}
+.comp{display:grid;grid-template-columns:minmax(0,1fr) 90px 36px;gap:8px;align-items:end}
+.x{background:none;border:1px solid var(--line);border-radius:8px;height:38px;cursor:pointer;color:var(--muted)}
+details>summary{cursor:pointer;font-weight:600}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand">Gisela's <span>Cakes</span> <span class="who" style="color:var(--muted)">· costos</span></div>
+  <div class="row" style="gap:8px"><span class="who" id="who"></span><button class="btn link sm" id="salir" hidden>Salir</button></div>
+</div></header>
+<div class="wrap"><nav class="tabs" id="tabs" hidden aria-label="Secciones"></nav></div>
+<main class="wrap" id="main"><div class="center"><p class="muted">Cargando…</p></div></main>
+<div class="toast" id="toast" hidden role="status"></div>
+
+<script>
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const money = n => (n == null || isNaN(n)) ? "—" : "$" + Number(n).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const money0 = n => (n == null || isNaN(n)) ? "—" : "$" + Math.round(n).toLocaleString("en-US");
+const r5 = n => Math.ceil(n / 5) * 5;
+const today = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
+const parseDate = s => s ? new Date(s + "T00:00:00") : null;
+const fmtDate = s => s ? parseDate(s).toLocaleDateString("es-US", { weekday: "short", day: "numeric", month: "short" }) : "sin fecha";
+const daysTo = s => s ? Math.round((parseDate(s) - today()) / 864e5) : null;
+function toast(m) { const t = $("#toast"); t.textContent = m; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 2600); }
+
+const TIPOS = { cumpleanos: "Cumpleaños", xv: "XV años", boda: "Boda", baby_shower: "Baby shower", cupcakes: "Cupcakes", mesa_postres: "Mesa de postres", galletas: "Galletas", otro: "Otro" };
+const ESTADOS = { cotizado: ["Cotizado", ""], confirmado: ["Confirmado", "ok"], en_produccion: ["En producción", "warn"], entregado: ["Entregado", "ok"], cancelado: ["Cancelado", "bad"] };
+const CATS = { bizcocho: "Bizcocho", relleno: "Relleno", cobertura: "Cobertura", decoracion: "Decoración", otro: "Empaque y otros" };
+const UNIDAD = { g: ["g", 1000, "/kg"], ml: ["ml", 1000, "/L"], unidad: ["u", 1, "/u"] };
+
+const S = { tab: "inicio", aj: null, ing: [], rec: [], items: [], ped: [], draft: null };
+let sb = null;
+
+// ---------- cálculo de costos y precios ----------
+const ingById = id => S.ing.find(i => i.id === id);
+function costoReceta(recId) {
+  return S.items.filter(it => it.receta_id === recId).reduce((s, it) => s + it.cantidad * (ingById(it.ingrediente_id)?.costo_unidad || 0), 0);
+}
+function cotizar(d) {
+  const a = S.aj;
+  const comp = (d.componentes || []).reduce((s, c) => s + costoReceta(c.receta_id) * (Number(c.veces) || 0), 0);
+  const extras = (d.extras || []).reduce((s, e) => s + (Number(e.costo) || 0), 0);
+  const costoIng = comp + extras;
+  const horas = Number(d.horas_decoracion) || 0;
+  const entrega = Number(d.entrega) || 0;
+  const porciones = Number(d.porciones) || 0;
+  const fijo = Number(a.costo_fijo_pedido);
+  const porCosto = costoIng * a.multiplicador + horas * a.tarifa_hora + fijo;
+  const extraFondant = d.fondant ? a.extra_fondant_porcion : 0;
+  const mercMin = porciones * (Number(a.precio_porcion_min) + extraFondant);
+  const mercMax = porciones * (Number(a.precio_porcion_max) + extraFondant);
+  const piso = Math.max(costoIng / 0.40, costoIng * 2 + horas * a.tarifa_hora * 0.8 + fijo);
+  const minimo = r5(piso) + entrega;
+  const recomendado = r5(Math.max(porCosto, mercMin, piso)) + entrega;
+  const premium = r5(Math.max(porCosto * 1.2, mercMax, recomendado * 1.15)) + entrega;
+  const res = p => { const sinEnt = p - entrega; const gan = sinEnt - costoIng - fijo; return { precio: p, pct: sinEnt > 0 ? costoIng / sinEnt : 0, ganancia: gan, porHora: gan / Math.max(horas + 2, 1), porPorcion: porciones ? p / porciones : null }; };
+  return { costoIng, comp, extras, porCosto, mercMin, mercMax, minimo: res(minimo), recomendado: res(recomendado), premium: res(premium) };
+}
+
+// ---------- datos ----------
+async function cargar() {
+  const [a, i, r, it, p] = await Promise.all([
+    sb.from("ajustes").select("*").eq("id", 1).single(),
+    sb.from("ingredientes").select("*").order("nombre"),
+    sb.from("recetas").select("*").order("categoria").order("nombre"),
+    sb.from("receta_items").select("*"),
+    sb.from("pedidos").select("*").order("fecha_evento", { ascending: true, nullsFirst: false })
+  ]);
+  const err = [a, i, r, it, p].find(x => x.error);
+  if (err) throw err.error;
+  S.aj = a.data; S.ing = i.data; S.rec = r.data; S.items = it.data; S.ped = p.data;
+}
+async function guardar(q, ok) { const { error } = await q; if (error) { toast("No se guardó: " + error.message); return false; } if (ok) toast(ok); await cargar(); render(); return true; }
+
+// ---------- vistas ----------
+const TABS = [["inicio", "🏠", "Inicio"], ["cotizar", "🧮", "Cotizar"], ["pedidos", "📋", "Pedidos"], ["inventario", "📦", "Inventario"], ["recetas", "🎂", "Recetas"], ["ajustes", "⚙️", "Ajustes"]];
+function renderTabs() {
+  const n = $("#tabs"); n.hidden = false;
+  n.innerHTML = TABS.map(([k, ic, t]) => `<button data-tab="${k}" ${S.tab === k ? 'aria-current="page"' : ""}><span class="ic" aria-hidden="true">${ic}</span>${t}</button>`).join("");
+  n.onclick = e => { const b = e.target.closest("button"); if (b) { S.tab = b.dataset.tab; render(); scrollTo(0, 0); } };
+}
+function render() { renderTabs(); $("#main").oninput = null; $("#main").onchange = null; $("#main").innerHTML = VIEWS[S.tab](); BIND[S.tab]?.(); }
+
+function stockEstado(i) {
+  if (i.minimo <= 0) return ["", "sin mínimo"];
+  if (i.existencia <= 0) return ["bad", "agotado"];
+  if (i.existencia < i.minimo) return ["warn", "bajo"];
+  return ["ok", "bien"];
+}
+function necesidades(dias = 14) {
+  const nec = {};
+  S.ped.filter(p => ["confirmado", "en_produccion"].includes(p.estado) && !p.inventario_descontado && (daysTo(p.fecha_evento) ?? 99) <= dias && (daysTo(p.fecha_evento) ?? -1) >= 0)
+    .forEach(p => (p.componentes || []).forEach(c => S.items.filter(it => it.receta_id === c.receta_id).forEach(it => { nec[it.ingrediente_id] = (nec[it.ingrediente_id] || 0) + it.cantidad * (Number(c.veces) || 0); })));
+  return nec;
+}
+function listaCompras() {
+  const nec = necesidades();
+  return S.ing.map(i => { const falta = Math.max(0, (nec[i.id] || 0) + Number(i.minimo) - Number(i.existencia)); return { i, falta, paquetes: Math.ceil(falta / i.tamano_paquete) }; })
+    .filter(x => x.falta > 0);
+}
+function waLink(tel, txt) { const d = String(tel || "").replace(/\D/g, ""); if (!d) return null; return "https://wa.me/" + (d.length === 10 ? "1" + d : d) + "?text=" + encodeURIComponent(txt); }
+
+const VIEWS = {
+  inicio() {
+    const now = new Date(); const mes = now.getMonth(), anio = now.getFullYear();
+    const delMes = S.ped.filter(p => { const d = parseDate(p.fecha_evento); return d && d.getMonth() === mes && d.getFullYear() === anio && ["confirmado", "en_produccion", "entregado"].includes(p.estado); });
+    const ventas = delMes.reduce((s, p) => s + Number(p.precio_final || p.precio_sugerido || 0), 0);
+    const costo = delMes.reduce((s, p) => s + Number(p.costo_ingredientes || 0), 0);
+    const proximos = S.ped.filter(p => ["confirmado", "en_produccion"].includes(p.estado) && (daysTo(p.fecha_evento) ?? -1) >= 0 && daysTo(p.fecha_evento) <= 14);
+    const pendientes = S.ped.filter(p => p.estado === "cotizado");
+    const bajos = S.ing.filter(i => ["warn", "bad"].includes(stockEstado(i)[0]));
+    const porCobrar = S.ped.filter(p => ["confirmado", "en_produccion"].includes(p.estado)).reduce((s, p) => s + Math.max(0, Number(p.precio_final || p.precio_sugerido || 0) - Number(p.deposito || 0)), 0);
+    return `
+    <div class="kpis">
+      <div class="kpi"><span>Ventas de ${now.toLocaleDateString("es-US", { month: "long" })}</span><b>${money0(ventas)}</b><span>${delMes.length} pedidos</span></div>
+      <div class="kpi"><span>Ganancia bruta del mes</span><b>${money0(ventas - costo)}</b><span>${ventas ? Math.round((1 - costo / ventas) * 100) + "% de margen" : "sin ventas aún"}</span></div>
+      <div class="kpi"><span>Por cobrar</span><b>${money0(porCobrar)}</b><span>saldo de pedidos confirmados</span></div>
+      <div class="kpi"><span>Inventario bajo</span><b>${bajos.length}</b><span>${bajos.length ? "revisa la lista de compras" : "todo en orden"}</span></div>
+    </div>
+    <section class="card"><h2>Próximas entregas</h2>
+      ${proximos.length ? `<div class="list">${proximos.map(p => pedidoMini(p)).join("")}</div>` : `<p class="muted">No hay entregas confirmadas en los próximos 14 días.</p>`}
+    </section>
+    <section class="card"><h2>Cotizaciones por confirmar</h2>
+      ${pendientes.length ? `<div class="list">${pendientes.map(p => pedidoMini(p, true)).join("")}</div>` : `<p class="muted">No hay cotizaciones pendientes. Cuando cotices una torta, aparece aquí hasta que el cliente confirme.</p>`}
+    </section>
+    ${bajos.length ? `<section class="card"><h2>Se está acabando</h2><p class="small muted">${bajos.map(i => esc(i.nombre)).join(" · ")}</p><div><button class="btn sec sm" data-go="inventario">Ver lista de compras</button></div></section>` : ""}`;
+  },
+
+  cotizar() {
+    const d = S.draft || (S.draft = nuevoDraft());
+    const opts = () => S.rec.map(r => `<option value="${r.id}">${esc(CATS[r.categoria])}: ${esc(r.nombre)} (${money(costoReceta(r.id))})</option>`).join("");
+    return `
+    <section class="card"><h2>${d.id ? "Editar pedido" : "Cotizar una torta"}</h2>
+      <div class="grid2">
+        <label>Cliente<input id="q-cliente" value="${esc(d.cliente)}" placeholder="Nombre"></label>
+        <label>Teléfono / WhatsApp<input id="q-telefono" value="${esc(d.telefono)}" inputmode="tel" placeholder="(847) 555-1234"></label>
+        <label>Fecha del evento<input id="q-fecha" type="date" value="${esc(d.fecha_evento)}"></label>
+        <label>Tipo<select id="q-tipo">${Object.entries(TIPOS).map(([k, v]) => `<option value="${k}" ${d.tipo === k ? "selected" : ""}>${v}</option>`).join("")}</select></label>
+        <label>Porciones<input id="q-porciones" type="number" min="0" inputmode="numeric" value="${esc(d.porciones)}"></label>
+        <label>Horas de decoración<input id="q-horas" type="number" min="0" step="0.25" value="${esc(d.horas_decoracion)}"></label>
+        <label>Entrega a domicilio ($)<input id="q-entrega" type="number" min="0" step="1" value="${esc(d.entrega)}"></label>
+        <label class="chk"><input id="q-fondant" type="checkbox" ${d.fondant ? "checked" : ""}> Lleva fondant</label>
+      </div>
+    </section>
+    <section class="card"><h3>¿Qué lleva?</h3>
+      <p class="small muted">Elige las recetas y cuántas veces las usas. Ej.: una torta de 2 pisos de 8" lleva "Bizcocho de vainilla 8"" ×2.</p>
+      <div class="list" id="q-comps">${d.componentes.map((x, n) => `<div class="comp"><label>Receta<select data-comp="${n}">${opts()}</select></label><label>Veces<input type="number" min="0" step="0.25" value="${x.veces}" data-veces="${n}"></label><button class="x" data-del="${n}" aria-label="Quitar">✕</button></div>`).join("")}</div>
+      <div><button class="btn sec sm" id="q-add">+ Agregar receta</button></div>
+      <h3>Extras</h3>
+      <p class="small muted">Topper, flores naturales, impresión comestible, base especial…</p>
+      <div class="list">${d.extras.map((x, n) => `<div class="comp"><label>Extra<input value="${esc(x.nombre)}" data-exn="${n}"></label><label>Costo $<input type="number" min="0" step="0.5" value="${x.costo}" data-exc="${n}"></label><button class="x" data-delx="${n}" aria-label="Quitar">✕</button></div>`).join("")}</div>
+      <div><button class="btn sec sm" id="q-addx">+ Agregar extra</button></div>
+    </section>
+    <section class="card"><h2>Precio sugerido</h2>
+      <div id="q-res" style="display:grid;gap:12px">${resultadoHTML(d)}</div>
+      <div class="grid2">
+        <label>Precio final acordado<input id="q-final" type="number" min="0" step="1" value="${esc(d.precio_final ?? "")}" placeholder="${c.recomendado.precio}"></label>
+        <label>Depósito recibido<input id="q-deposito" type="number" min="0" step="1" value="${esc(d.deposito)}"></label>
+      </div>
+      <label>Notas (diseño, colores, sabor, alergias)<textarea id="q-notas">${esc(d.notas)}</textarea></label>
+      <div class="row">
+        <button class="btn" id="q-guardar">${d.id ? "Guardar cambios" : "Guardar cotización"}</button>
+        <button class="btn sec" id="q-wa">Enviar cotización por WhatsApp</button>
+        <button class="btn link" id="q-nuevo">Empezar de nuevo</button>
+      </div>
+    </section>`;
+  },
+
+  pedidos() {
+    const f = S.filtro || "activos";
+    const lista = S.ped.filter(p => f === "todos" ? true : f === "activos" ? ["cotizado", "confirmado", "en_produccion"].includes(p.estado) : p.estado === f);
+    return `<section class="card"><div class="row" style="justify-content:space-between"><h2>Pedidos</h2>
+      <label style="min-width:180px">Mostrar<select id="p-filtro">${[["activos", "Activos"], ["entregado", "Entregados"], ["cancelado", "Cancelados"], ["todos", "Todos"]].map(([k, v]) => `<option value="${k}" ${f === k ? "selected" : ""}>${v}</option>`).join("")}</select></label></div>
+      ${lista.length ? `<div class="list">${lista.map(pedidoCard).join("")}</div>` : `<p class="muted">No hay pedidos aquí. Crea uno desde <a href="#" data-go="cotizar">Cotizar</a>.</p>`}
+    </section>`;
+  },
+
+  inventario() {
+    const compras = listaCompras();
+    return `<section class="card"><h2>Lista de compras</h2>
+      <p class="small muted">Lo que está bajo el mínimo más lo que necesitan los pedidos confirmados de los próximos 14 días.</p>
+      ${compras.length ? `<div class="tw"><table><thead><tr><th>Ingrediente</th><th class="num">Falta</th><th class="num">Comprar</th><th class="num">Aprox.</th></tr></thead><tbody>
+      ${compras.map(x => `<tr><td>${esc(x.i.nombre)}<div class="small muted">${esc(x.i.proveedor || "")}</div></td><td class="num">${Math.ceil(x.falta)} ${UNIDAD[x.i.unidad][0]}</td><td class="num">${x.paquetes} paq.</td><td class="num">${money(x.paquetes * x.i.costo_paquete)}</td></tr>`).join("")}
+      </tbody></table></div><p class="small"><b>Total aproximado: ${money(compras.reduce((s, x) => s + x.paquetes * x.i.costo_paquete, 0))}</b></p>` : `<p class="muted">No hace falta comprar nada por ahora.</p>`}
+    </section>
+    <section class="card"><h2>Inventario y precios</h2>
+      <p class="small muted">Actualiza el costo cuando compres y la existencia cuando hagas inventario. Todo se guarda al salir de la casilla.</p>
+      <div class="tw"><table><thead><tr><th>Ingrediente</th><th class="num">En casa</th><th class="num">Mínimo</th><th class="num">Paquete</th><th class="num">Costo paq.</th><th class="num">Costo</th><th>Estado</th></tr></thead><tbody>
+      ${S.ing.map(i => { const [cls, t] = stockEstado(i); const u = UNIDAD[i.unidad]; return `<tr>
+        <td>${esc(i.nombre)}</td>
+        <td class="num"><input type="number" min="0" step="any" value="${i.existencia}" data-ing="${i.id}" data-f="existencia" aria-label="Existencia de ${esc(i.nombre)}"> ${u[0]}</td>
+        <td class="num"><input type="number" min="0" step="any" value="${i.minimo}" data-ing="${i.id}" data-f="minimo" aria-label="Mínimo de ${esc(i.nombre)}"></td>
+        <td class="num"><input type="number" min="0" step="any" value="${i.tamano_paquete}" data-ing="${i.id}" data-f="tamano_paquete" aria-label="Tamaño del paquete de ${esc(i.nombre)}"> ${u[0]}</td>
+        <td class="num"><input type="number" min="0" step="0.01" value="${i.costo_paquete}" data-ing="${i.id}" data-f="costo_paquete" aria-label="Costo del paquete de ${esc(i.nombre)}"></td>
+        <td class="num">${money(i.costo_unidad * u[1])}${u[2]}</td>
+        <td><span class="pill ${cls}">${t}</span></td></tr>`; }).join("")}
+      </tbody></table></div>
+      <details><summary>Agregar ingrediente</summary>
+        <div class="grid2" style="margin-top:10px">
+          <label>Nombre<input id="n-nombre" placeholder="Ej.: Coco rallado"></label>
+          <label>Unidad<select id="n-unidad"><option value="g">gramos (g)</option><option value="ml">mililitros (ml)</option><option value="unidad">unidades</option></select></label>
+          <label>Tamaño del paquete<input id="n-tam" type="number" min="0" step="any" placeholder="Ej.: 454"></label>
+          <label>Costo del paquete $<input id="n-costo" type="number" min="0" step="0.01"></label>
+          <label>En casa<input id="n-exist" type="number" min="0" step="any" value="0"></label>
+          <label>Mínimo<input id="n-min" type="number" min="0" step="any" value="0"></label>
+          <label>Proveedor<input id="n-prov" placeholder="Costco, Jewel…"></label>
+        </div>
+        <div style="margin-top:10px"><button class="btn sm" id="n-guardar">Agregar</button></div>
+      </details>
+    </section>`;
+  },
+
+  recetas() {
+    return `<section class="card"><h2>Recetas</h2>
+      <p class="small muted">El costo de cada receta se calcula solo con los precios del inventario. Si cambia el precio de la mantequilla, cambian todas.</p>
+      <div class="list">${S.rec.map(r => { const its = S.items.filter(it => it.receta_id === r.id); return `<details class="item"><summary><div class="top"><span>${esc(r.nombre)} <span class="pill">${CATS[r.categoria]}</span></span><span class="num"><b>${money(costoReceta(r.id))}</b>${r.porciones ? ` · ${money(costoReceta(r.id) / r.porciones)}/porción` : ""}</span></div></summary>
+        <p class="small muted">${esc(r.rinde || "")}${r.notas ? " · " + esc(r.notas) : ""}</p>
+        <div class="tw"><table><thead><tr><th>Ingrediente</th><th class="num">Cantidad</th><th class="num">Costo</th><th></th></tr></thead><tbody>
+        ${its.map(it => { const i = ingById(it.ingrediente_id); return `<tr><td>${esc(i?.nombre)}</td><td class="num"><input type="number" min="0" step="any" value="${it.cantidad}" data-item="${it.id}" aria-label="Cantidad"> ${UNIDAD[i?.unidad]?.[0] || ""}</td><td class="num">${money(it.cantidad * (i?.costo_unidad || 0))}</td><td><button class="x" data-delitem="${it.id}" aria-label="Quitar ingrediente">✕</button></td></tr>`; }).join("")}
+        </tbody></table></div>
+        <div class="comp"><label>Agregar ingrediente<select data-newing="${r.id}">${S.ing.map(i => `<option value="${i.id}">${esc(i.nombre)} (${UNIDAD[i.unidad][0]})</option>`).join("")}</select></label><label>Cantidad<input type="number" min="0" step="any" data-newqty="${r.id}"></label><button class="x" data-additem="${r.id}" aria-label="Agregar">＋</button></div>
+      </details>`; }).join("")}</div>
+      <details><summary>Nueva receta</summary>
+        <div class="grid2" style="margin-top:10px">
+          <label>Nombre<input id="r-nombre" placeholder='Ej.: Bizcocho red velvet 8"'></label>
+          <label>Categoría<select id="r-cat">${Object.entries(CATS).map(([k, v]) => `<option value="${k}">${v}</option>`).join("")}</select></label>
+          <label>Rinde<input id="r-rinde" placeholder='1 torta de 8", 2 capas'></label>
+          <label>Porciones<input id="r-porc" type="number" min="0"></label>
+        </div>
+        <div style="margin-top:10px"><button class="btn sm" id="r-guardar">Crear receta</button></div>
+      </details>
+    </section>`;
+  },
+
+  ajustes() {
+    const a = S.aj; const f = (k, t, step = "0.01", ayuda = "") => `<label>${t}<input type="number" min="0" step="${step}" value="${a[k]}" data-aj="${k}">${ayuda ? `<span class="small muted" style="font-weight:400">${ayuda}</span>` : ""}</label>`;
+    return `<section class="card"><h2>Cómo calcula los precios</h2>
+      <div class="grid2">
+        ${f("tarifa_hora", "Valor de tu hora de trabajo ($)", "1", "Cuánto vale una hora de decoración.")}
+        ${f("multiplicador", "Multiplicador de ingredientes", "0.1", "El estándar de repostería es 3.")}
+        ${f("costo_fijo_pedido", "Gastos fijos por pedido ($)", "0.5", "Luz, gas, jabón, desgaste.")}
+        ${f("precio_porcion_min", "Precio por porción, mínimo de la zona ($)")}
+        ${f("precio_porcion_max", "Precio por porción, máximo de la zona ($)")}
+        ${f("extra_fondant_porcion", "Extra por porción con fondant ($)")}
+        ${f("meta_costo_ingredientes", "Meta: máximo de ingredientes sobre el precio", "0.01", "0.32 = 32%.")}
+      </div>
+      <p class="small muted">Los cambios se guardan al salir de cada casilla.</p>
+    </section>`;
+  }
+};
+
+function resultadoHTML(d) {
+  const c = cotizar(d);
+  const precio = (k, t, nota) => { const x = c[k]; const pctCls = x.pct > 0.4 ? "bad" : x.pct > S.aj.meta_costo_ingredientes ? "warn" : "ok";
+    return `<div class="price ${k === "recomendado" ? "rec" : ""}"><small>${t}</small><b>${money0(x.precio)}</b>
+    <small>${x.porPorcion ? money(x.porPorcion) + " por porción · " : ""}<span class="pill ${pctCls}">${Math.round(x.pct * 100)}% ingredientes</span></small>
+    <small>Ganas ${money0(x.ganancia)} · ${money(x.porHora)}/hora</small><small>${nota}</small>
+    <button class="btn sec sm" type="button" data-usar="${x.precio}">Usar este precio</button></div>`; };
+  return `<p class="small" style="margin:0">Te cuesta en ingredientes y empaque: <b>${money(c.costoIng)}</b>${d.porciones ? ` · Mercado de la zona para ${d.porciones} porciones: ${money0(c.mercMin)} a ${money0(c.mercMax)}` : ""}</p>
+    <div class="prices">
+      ${precio("minimo", "Mínimo · no bajes de aquí", "Solo para amigos o pedidos muy simples.")}
+      ${precio("recomendado", "Recomendado", "Cubre tu tiempo y queda en precio de mercado.")}
+      ${precio("premium", "Premium", "Diseños elaborados, fechas pico o entregas urgentes.")}
+    </div>
+    <details><summary class="small">¿Cómo se calcula?</summary><p class="small muted">Ingredientes ×${S.aj.multiplicador} + ${d.horas_decoracion || 0} h × ${money(S.aj.tarifa_hora)} + gastos fijos ${money(S.aj.costo_fijo_pedido)} = ${money(c.porCosto)}. Se compara con el precio por porción de la zona (${money(S.aj.precio_porcion_min)}–${money(S.aj.precio_porcion_max)}${d.fondant ? " + fondant " + money(S.aj.extra_fondant_porcion) : ""}) y se toma el mayor, redondeado a $5. Nunca baja de un punto en que los ingredientes pasen del 40% del precio. La ganancia por hora cuenta 2 horas de horneado además de la decoración.</p></details>`;
+}
+function pedidoMini(p, cot) {
+  const dd = daysTo(p.fecha_evento); const precio = p.precio_final || p.precio_sugerido;
+  return `<div class="item"><div class="top"><b>${esc(p.cliente)}</b><span class="small">${fmtDate(p.fecha_evento)}${dd != null ? ` · ${dd === 0 ? "hoy" : dd === 1 ? "mañana" : dd > 0 ? "en " + dd + " días" : "hace " + (-dd) + " días"}` : ""}</span></div>
+    <div class="small muted">${TIPOS[p.tipo] || p.tipo}${p.porciones ? " · " + p.porciones + " porciones" : ""} · ${money0(precio)}${Number(p.deposito) ? " · depósito " + money0(p.deposito) : ""}</div>
+    <div class="row">${botonWa(p, cot ? "seguimiento" : "recordatorio")}<button class="btn link sm" data-edit="${p.id}">Abrir</button></div></div>`;
+}
+function botonWa(p, tipo) {
+  const precio = p.precio_final || p.precio_sugerido;
+  const txt = tipo === "seguimiento"
+    ? `Hola ${p.cliente}, soy Gisela de Gisela's Cakes 🎂. Te escribo por la cotización de tu ${TIPOS[p.tipo]?.toLowerCase() || "torta"} para el ${fmtDate(p.fecha_evento)} (${money0(precio)}). ¿Te reservo la fecha? Con el 50% de depósito por Zelle queda confirmada.`
+    : tipo === "gracias"
+    ? `¡Hola ${p.cliente}! Gracias por confiar en Gisela's Cakes 💕 Espero que hayan disfrutado la torta. Si te gustó, me ayudarías muchísimo con una reseña en Google. ¡Gracias!`
+    : `Hola ${p.cliente}, te recuerda Gisela de Gisela's Cakes 🎂: tu ${TIPOS[p.tipo]?.toLowerCase() || "torta"} está lista para el ${fmtDate(p.fecha_evento)}. Saldo pendiente: ${money0(Math.max(0, Number(precio || 0) - Number(p.deposito || 0)))}. ¿Confirmamos la hora de entrega?`;
+  const url = waLink(p.telefono, txt);
+  return url ? `<a class="btn sec sm" href="${url}" target="_blank" rel="noopener">WhatsApp: ${tipo}</a>` : `<span class="small muted">Sin teléfono</span>`;
+}
+function pedidoCard(p) {
+  const [t, cls] = ESTADOS[p.estado]; const precio = p.precio_final || p.precio_sugerido; const saldo = Math.max(0, Number(precio || 0) - Number(p.deposito || 0));
+  const margen = precio ? 1 - Number(p.costo_ingredientes || 0) / Number(precio) : null;
+  return `<div class="item"><div class="top"><b>${esc(p.cliente)}</b><span class="pill ${cls}">${t}</span></div>
+    <div class="small">${fmtDate(p.fecha_evento)} · ${TIPOS[p.tipo] || p.tipo}${p.porciones ? " · " + p.porciones + " porciones" : ""}</div>
+    <div class="small muted">Precio ${money0(precio)} · Depósito ${money0(p.deposito)} · Saldo ${money0(saldo)}${margen != null ? ` · Margen ${Math.round(margen * 100)}%` : ""}</div>
+    ${p.notas ? `<div class="small">${esc(p.notas)}</div>` : ""}
+    <div class="row">
+      <label style="min-width:170px">Estado<select data-estado="${p.id}">${Object.entries(ESTADOS).map(([k, v]) => `<option value="${k}" ${p.estado === k ? "selected" : ""}>${v[0]}</option>`).join("")}</select></label>
+      ${botonWa(p, p.estado === "cotizado" ? "seguimiento" : p.estado === "entregado" ? "gracias" : "recordatorio")}
+      ${["en_produccion", "entregado"].includes(p.estado) && !p.inventario_descontado ? `<button class="btn sec sm" data-descontar="${p.id}">Descontar del inventario</button>` : ""}
+      ${p.inventario_descontado ? `<span class="small muted">Inventario descontado</span>` : ""}
+      <button class="btn link sm" data-edit="${p.id}">Editar</button>
+    </div></div>`;
+}
+
+function nuevoDraft() {
+  const vain = S.rec.find(r => r.nombre.startsWith("Bizcocho de vainilla")), bc = S.rec.find(r => r.nombre.startsWith("Buttercream para torta")), emp = S.rec.find(r => r.nombre === "Empaque torta");
+  return { cliente: "", telefono: "", fecha_evento: "", tipo: "cumpleanos", porciones: 24, horas_decoracion: 1.5, entrega: 0, fondant: false, deposito: 0, precio_final: null, notas: "",
+    componentes: [vain, bc, emp].filter(Boolean).map(r => ({ receta_id: r.id, veces: 1 })), extras: [] };
+}
+
+// ---------- eventos ----------
+const BIND = {
+  inicio() { bindComunes(); },
+  pedidos() {
+    bindComunes();
+    $("#p-filtro").onchange = e => { S.filtro = e.target.value; render(); };
+    document.querySelectorAll("[data-estado]").forEach(s => s.onchange = () => guardar(sb.from("pedidos").update({ estado: s.value, actualizado: new Date().toISOString() }).eq("id", s.dataset.estado), "Estado actualizado"));
+    document.querySelectorAll("[data-descontar]").forEach(b => b.onclick = () => guardar(sb.rpc("descontar_inventario", { p_pedido: b.dataset.descontar }), "Inventario descontado"));
+  },
+  cotizar() {
+    const d = S.draft;
+    const leer = () => {
+      d.cliente = $("#q-cliente").value; d.telefono = $("#q-telefono").value; d.fecha_evento = $("#q-fecha").value; d.tipo = $("#q-tipo").value;
+      d.porciones = Number($("#q-porciones").value) || 0; d.horas_decoracion = Number($("#q-horas").value) || 0; d.entrega = Number($("#q-entrega").value) || 0;
+      d.fondant = $("#q-fondant").checked; d.deposito = Number($("#q-deposito").value) || 0; d.notas = $("#q-notas").value;
+      d.precio_final = $("#q-final").value === "" ? null : Number($("#q-final").value);
+      document.querySelectorAll("[data-comp]").forEach(s => d.componentes[s.dataset.comp].receta_id = s.value);
+      document.querySelectorAll("[data-veces]").forEach(s => d.componentes[s.dataset.veces].veces = Number(s.value) || 0);
+      document.querySelectorAll("[data-exn]").forEach(s => d.extras[s.dataset.exn].nombre = s.value);
+      document.querySelectorAll("[data-exc]").forEach(s => d.extras[s.dataset.exc].costo = Number(s.value) || 0);
+    };
+    document.querySelectorAll("[data-comp]").forEach(s => s.value = d.componentes[s.dataset.comp].receta_id);
+    const usar = () => document.querySelectorAll("[data-usar]").forEach(b => b.onclick = () => { leer(); d.precio_final = Number(b.dataset.usar); $("#q-final").value = d.precio_final; toast("Precio puesto: " + money0(d.precio_final)); });
+    const actualizar = () => { leer(); $("#q-res").innerHTML = resultadoHTML(d); usar(); };
+    $("#main").oninput = e => { if (e.target.matches("input,select,textarea")) actualizar(); };
+    $("#main").onchange = e => { if (e.target.matches("select,input[type=checkbox]")) actualizar(); };
+    usar();
+    $("#q-add").onclick = () => { leer(); d.componentes.push({ receta_id: S.rec[0]?.id, veces: 1 }); render(); };
+    $("#q-addx").onclick = () => { leer(); d.extras.push({ nombre: "", costo: 0 }); render(); };
+    document.querySelectorAll("[data-del]").forEach(b => b.onclick = () => { leer(); d.componentes.splice(b.dataset.del, 1); render(); });
+    document.querySelectorAll("[data-delx]").forEach(b => b.onclick = () => { leer(); d.extras.splice(b.dataset.delx, 1); render(); });
+    $("#q-nuevo").onclick = () => { S.draft = nuevoDraft(); render(); };
+    $("#q-wa").onclick = () => {
+      leer(); const c = cotizar(d); const precio = d.precio_final ?? c.recomendado.precio;
+      const txt = `Hola ${d.cliente || ""}, soy Gisela de Gisela's Cakes 🎂\nTe comparto la cotización:\n• ${TIPOS[d.tipo]}${d.porciones ? " para " + d.porciones + " porciones" : ""}\n• Fecha: ${fmtDate(d.fecha_evento)}\n${d.notas ? "• " + d.notas + "\n" : ""}${d.entrega ? "• Incluye entrega a domicilio\n" : ""}Total: ${money0(precio)}\nPara reservar la fecha: depósito del 50% (${money0(precio / 2)}) por Zelle. ¡Gracias!`;
+      const url = waLink(d.telefono, txt); if (!url) { toast("Escribe el teléfono del cliente"); return; } window.open(url, "_blank", "noopener");
+    };
+    $("#q-guardar").onclick = async () => {
+      leer(); if (!d.cliente.trim()) { toast("Escribe el nombre del cliente"); return; }
+      const c = cotizar(d);
+      const row = { cliente: d.cliente.trim(), telefono: d.telefono || null, fecha_evento: d.fecha_evento || null, tipo: d.tipo, porciones: d.porciones || null, componentes: d.componentes, extras: d.extras,
+        horas_decoracion: d.horas_decoracion, fondant: d.fondant, entrega: d.entrega, costo_ingredientes: Math.round(c.costoIng * 100) / 100, precio_sugerido: c.recomendado.precio,
+        precio_final: d.precio_final, deposito: d.deposito, notas: d.notas || null, actualizado: new Date().toISOString() };
+      const ok = await guardar(d.id ? sb.from("pedidos").update(row).eq("id", d.id) : sb.from("pedidos").insert(row), d.id ? "Pedido actualizado" : "Cotización guardada");
+      if (ok) { S.draft = null; S.tab = "pedidos"; render(); }
+    };
+  },
+  inventario() {
+    document.querySelectorAll("[data-ing]").forEach(inp => inp.onchange = () => guardar(sb.from("ingredientes").update({ [inp.dataset.f]: Number(inp.value) || 0, actualizado: new Date().toISOString() }).eq("id", inp.dataset.ing), "Guardado"));
+    $("#n-guardar").onclick = () => {
+      const nombre = $("#n-nombre").value.trim(), tam = Number($("#n-tam").value);
+      if (!nombre || !(tam > 0)) { toast("Falta el nombre o el tamaño del paquete"); return; }
+      guardar(sb.from("ingredientes").insert({ nombre, unidad: $("#n-unidad").value, tamano_paquete: tam, costo_paquete: Number($("#n-costo").value) || 0, existencia: Number($("#n-exist").value) || 0, minimo: Number($("#n-min").value) || 0, proveedor: $("#n-prov").value || null }), "Ingrediente agregado");
+    };
+  },
+  recetas() {
+    document.querySelectorAll("[data-item]").forEach(inp => inp.onchange = () => { const v = Number(inp.value); if (!(v > 0)) { toast("La cantidad debe ser mayor que 0"); return; } guardar(sb.from("receta_items").update({ cantidad: v }).eq("id", inp.dataset.item), "Guardado"); });
+    document.querySelectorAll("[data-delitem]").forEach(b => b.onclick = () => guardar(sb.from("receta_items").delete().eq("id", b.dataset.delitem), "Ingrediente quitado"));
+    document.querySelectorAll("[data-additem]").forEach(b => b.onclick = () => { const id = b.dataset.additem; const q = Number($(`[data-newqty="${id}"]`).value); if (!(q > 0)) { toast("Escribe la cantidad"); return; }
+      guardar(sb.from("receta_items").insert({ receta_id: id, ingrediente_id: $(`[data-newing="${id}"]`).value, cantidad: q }), "Ingrediente agregado"); });
+    $("#r-guardar").onclick = () => { const nombre = $("#r-nombre").value.trim(); if (!nombre) { toast("Escribe el nombre"); return; }
+      guardar(sb.from("recetas").insert({ nombre, categoria: $("#r-cat").value, rinde: $("#r-rinde").value || null, porciones: Number($("#r-porc").value) || null }), "Receta creada"); };
+  },
+  ajustes() {
+    document.querySelectorAll("[data-aj]").forEach(inp => inp.onchange = () => guardar(sb.from("ajustes").update({ [inp.dataset.aj]: Number(inp.value) || 0, actualizado: new Date().toISOString() }).eq("id", 1), "Ajuste guardado"));
+  }
+};
+function bindComunes() {
+  document.querySelectorAll("[data-go]").forEach(b => b.onclick = e => { e.preventDefault(); S.tab = b.dataset.go; render(); });
+  document.querySelectorAll("[data-edit]").forEach(b => b.onclick = () => { const p = S.ped.find(x => x.id === b.dataset.edit); S.draft = JSON.parse(JSON.stringify(p)); S.tab = "cotizar"; render(); scrollTo(0, 0); });
+}
+
+// ---------- acceso ----------
+function pantallaLogin(msg) {
+  $("#tabs").hidden = true; $("#salir").hidden = true; $("#who").textContent = "";
+  $("#main").innerHTML = `<div class="center"><form class="card" id="login" style="max-width:380px;width:100%;text-align:left">
+    <h2>Entrar</h2><p class="small muted">Te mandamos un enlace a tu correo. Solo el equipo de Gisela's Cakes tiene acceso.</p>
+    <label>Correo<input id="l-email" type="email" required autocomplete="email" placeholder="tu@correo.com"></label>
+    <button class="btn" type="submit">Enviarme el enlace</button><p class="small" id="l-msg" role="status">${esc(msg || "")}</p></form></div>`;
+  $("#login").onsubmit = async e => {
+    e.preventDefault(); const email = $("#l-email").value.trim();
+    const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: location.origin + location.pathname, shouldCreateUser: true } });
+    $("#l-msg").textContent = error ? "No se pudo enviar: " + error.message : "Listo. Revisa tu correo y abre el enlace en este mismo teléfono.";
+  };
+}
+async function iniciar() {
+  const cfg = window.GC_CONFIG || {};
+  if (!cfg.supabaseUrl || cfg.supabaseUrl === "PENDIENTE") { $("#main").innerHTML = `<div class="center"><div class="card" style="max-width:420px"><h2>Casi lista</h2><p class="muted">Falta conectar la base de datos. César la está configurando.</p></div></div>`; return; }
+  sb = supabase.createClient(cfg.supabaseUrl, cfg.supabaseKey);
+  const { data: { session } } = await sb.auth.getSession();
+  const habiaSesion = !!session;
+  sb.auth.onAuthStateChange(ev => { if (ev === "SIGNED_OUT" || (ev === "SIGNED_IN" && !habiaSesion)) location.replace(location.pathname); });
+  if (location.hash.includes("access_token")) history.replaceState(null, "", location.pathname);
+  if (!session) { pantallaLogin(); return; }
+  $("#who").textContent = session.user.email; $("#salir").hidden = false; $("#salir").onclick = () => sb.auth.signOut();
+  try { await cargar(); } catch (e) { $("#main").innerHTML = `<div class="center"><div class="card" style="max-width:420px"><h2>Sin acceso</h2><p class="muted">Este correo no está en el equipo de Gisela's Cakes, o hubo un error al cargar: ${esc(e.message)}</p><button class="btn sec" onclick="sb.auth.signOut()">Salir</button></div></div>`; return; }
+  if (!S.aj) { $("#main").innerHTML = `<div class="center"><div class="card" style="max-width:420px"><h2>Sin acceso</h2><p class="muted">Este correo (${esc(session.user.email)}) no está autorizado. Pide a César que lo agregue.</p><button class="btn sec" onclick="sb.auth.signOut()">Salir</button></div></div>`; return; }
+  render();
+}
+iniciar();
+</script>
+</body>
+</html>
