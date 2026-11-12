@@ -149,6 +149,8 @@ details p { color: var(--muted); margin: 10px 0 0; max-width: 70ch; }
 footer { border-top: 1px solid var(--line); padding-block: 36px; font-size: .88rem; color: var(--muted); }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
 .legal { max-width: 70ch; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+footer a { color: inherit; }
 [data-en] { display: none; }
 html[lang="en"] [data-es] { display: none; }
 html[lang="en"] [data-en] { display: revert; }
@@ -375,7 +377,7 @@ html[lang="en"] [data-en] { display: revert; }
 
 <footer>
   <div class="wrap">
-    <span>© <span id="yr">2026</span> Gisela's Cakes · Schaumburg, Illinois</span>
+    <span>© <span id="yr">2026</span> Gisela's Cakes · Schaumburg, Illinois · <span data-es>Sitio web por <a href="https://aulervia.com/es" target="_blank" rel="nofollow noopener">Aulervia<span class="sr-only"> (se abre en una pestaña nueva)</span></a></span><span data-en>Website by <a href="https://aulervia.com/en" target="_blank" rel="nofollow noopener">Aulervia<span class="sr-only"> (opens in a new tab)</span></a></span></span>
     <span class="legal"><span data-es>Este producto fue elaborado en una cocina casera no inspeccionada por un departamento de salud, que también puede procesar alérgenos comunes. Si tiene dudas de seguridad, contacte a su departamento de salud local.</span><span data-en>This product was produced in a home kitchen not inspected by a health department that may also process common food allergens. If you have safety concerns, contact your local health department.</span></span>
   </div>
 </footer>
